@@ -7,24 +7,38 @@
             InitializeComponent();
 
 
-            if (IsUserLoggedIn())
-            {
+            //if (IsUserLoggedIn())
+            //{
+            //    MainPage = new AppShell();
+            //}
+            //else
+            //{
+            //    MainPage = new NavigationPage(new LoginPage());
 
-                MainPage = new AppShell();
-            }
-            else
-            {
-                MainPage = new NavigationPage(new LoginPage());
+            //    //MainPage = new NavigationPage(new RegisterPage());
+            //}
 
-                //MainPage = new NavigationPage(new RegisterPage());
-            }
+            InitializeComponent();
+            MainPage = new AppShell();
 
         }
 
-        private bool IsUserLoggedIn()
+        protected override async void OnStart()
         {
-            return true;
+            var token = await SecureStorage.GetAsync("firebase_token");
+            if (string.IsNullOrEmpty(token))
+            {
+                // Redirige a LoginPage si no hay sesión activa
+                //await Shell.Current.GoToAsync("//LoginPage");
+
+                //MainPage = new NavigationPage(new LoginPage());
+            }
         }
+
+        //private bool IsUserLoggedIn()
+        //{
+        //    return true;
+        //}
 
 
 

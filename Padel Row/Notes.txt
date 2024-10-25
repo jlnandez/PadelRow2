@@ -1,0 +1,2 @@
+dotnet add package Firebase.Auth
+dotnet add package Microsoft.Maui.Essentials
