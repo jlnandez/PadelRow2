@@ -10,27 +10,40 @@
     
     Title="Padel_Row">
 
+    <!-- Página de Inicio de Sesión como una ruta independiente -->
+    <ShellContent
+        Title="Iniciar sesión"
+        ContentTemplate="{DataTemplate views:SignInView}"
+        Route="SignIn" />
+
+    <ShellContent
+        Title="Registrar"
+        ContentTemplate="{DataTemplate views:SignUpView}"
+        Route="SignUp" />
+
+
+    <!-- TabBar principal, visible solo después de iniciar sesión -->
     <TabBar>
         <Tab Icon="menu.png">
             <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate views:MainPage}"
-            Route="MainPage" />
+                Title="Home"
+                ContentTemplate="{DataTemplate views:MainPage}"
+                Route="MainPage" />
         </Tab>
 
         <Tab Icon="player.png">
             <ShellContent
-            Title="Player"
-            ContentTemplate="{DataTemplate views:PlayerPage}"
-            Route="PlayerPage" />
-        </Tab>
-        <Tab Icon="marcador.png">
-            <ShellContent
-            Title="Score"
-            ContentTemplate="{DataTemplate views:ScorePage}"
-            Route="ScorePage" />
+                Title="Player"
+                ContentTemplate="{DataTemplate views:PlayerPage}"
+                Route="PlayerPage" />
         </Tab>
 
+        <Tab Icon="marcador.png">
+            <ShellContent
+                Title="Score"
+                ContentTemplate="{DataTemplate views:ScorePage}"
+                Route="ScorePage" />
+        </Tab>
     </TabBar>
     
     

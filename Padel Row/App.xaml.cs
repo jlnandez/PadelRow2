@@ -1,46 +1,55 @@
-﻿namespace Padel_Row
+﻿using Firebase.Auth;
+using Padel_Row.Views;
+
+namespace Padel_Row
 {
     public partial class App : Application
     {
-        public App()
+        private readonly FirebaseAuthClient _authClient;
+
+        public App(FirebaseAuthClient authClient)
         {
             InitializeComponent();
 
+            _authClient = authClient;
 
-            //if (IsUserLoggedIn())
-            //{
-            //    MainPage = new AppShell();
-            //}
-            //else
-            //{
-            //    MainPage = new NavigationPage(new LoginPage());
-
-            //    //MainPage = new NavigationPage(new RegisterPage());
-            //}
-
-            InitializeComponent();
             MainPage = new AppShell();
 
+            CheckUserAuthentication();
         }
 
-        protected override async void OnStart()
+        private async void CheckUserAuthentication()
         {
-            var token = await SecureStorage.GetAsync("firebase_token");
-            if (string.IsNullOrEmpty(token))
-            {
-                // Redirige a LoginPage si no hay sesión activa
-                //await Shell.Current.GoToAsync("//LoginPage");
+            var token = await SecureStorage.Default.GetAsync("auth_token");
 
-                //MainPage = new NavigationPage(new LoginPage());
+            if (!string.IsNullOrEmpty(token))
+            {
+                try
+                {
+                    // Usar el token para restablecer la sesión
+                    //await _authClient.SignInWithCustomTokenAsync(token);
+                    await Shell.Current.GoToAsync("//MainPage");
+                }
+                catch
+                {
+                    // Si el token es inválido, redirige a la página de inicio de sesión
+                    await Shell.Current.GoToAsync("//SignIn");
+                }
+            }
+            else
+            {
+                // No hay token, redirige a la página de inicio de sesión
+                await Shell.Current.GoToAsync("//SignIn");
             }
         }
 
-        //private bool IsUserLoggedIn()
-        //{
-        //    return true;
-        //}
+        public async Task SignOut()
+        {
+            // Eliminar el token de autenticación
+            SecureStorage.Default.Remove("auth_token");
 
-
-
+            // Navegar a la página de inicio de sesión
+            await Shell.Current.GoToAsync("//SignIn");
+        }
     }
 }

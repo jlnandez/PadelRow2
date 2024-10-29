@@ -1,2 +1,10 @@
-dotnet add package Firebase.Auth
-dotnet add package Microsoft.Maui.Essentials
+**Login - Firebase Maui
+https://www.youtube.com/watch?app=desktop&v=3DQMQ9Vuk0c
+**
+dotnet add package FirebaseAuthentication.net
+
+
+https://www.youtube.com/watch?app=desktop&v=3DQMQ9Vuk0c
+
+https://www.youtube.com/watch?v=IEcm8X9Ukiw
+
