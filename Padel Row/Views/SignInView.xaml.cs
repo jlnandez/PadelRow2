@@ -15,18 +15,18 @@ public partial class SignInView : ContentPage
         BindingContext = viewModel;
 
         // Suscribirse al evento de inicio de sesión exitoso
-        _viewModel.SignInSuccess += OnSignInSuccess;
+        //_viewModel.SignInSuccess += OnSignInSuccess;
     }
 
-    private async void OnSignInSuccess()
-    {
-        await DisplayAlert("Inicio de Sesión", "¡Sesión iniciada exitosamente!", "OK");
-    }
+    //private async void OnSignInSuccess()
+    //{
+    //    await DisplayAlert("Inicio de Sesión", "¡Sesión iniciada exitosamente!", "OK");
+    //}
 
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        // Cancelar la suscripción para evitar fugas de memoria
-        _viewModel.SignInSuccess -= OnSignInSuccess;
-    }
+    //protected override void OnDisappearing()
+    //{
+    //    base.OnDisappearing();
+    //    // Cancelar la suscripción para evitar fugas de memoria
+    //    _viewModel.SignInSuccess -= OnSignInSuccess;
+    //}
 }

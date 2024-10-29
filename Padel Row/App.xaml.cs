@@ -34,6 +34,9 @@ namespace Padel_Row
                 {
                     // Si el token es inválido, redirige a la página de inicio de sesión
                     await Shell.Current.GoToAsync("//SignIn");
+
+                    
+
                 }
             }
             else

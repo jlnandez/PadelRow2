@@ -7,20 +7,7 @@
     xmlns:views="clr-namespace:Padel_Row.Views"
     Shell.FlyoutBehavior="Flyout"
     Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={StaticResource OffBlack}}"
-    
     Title="Padel_Row">
-
-    <!-- Página de Inicio de Sesión como una ruta independiente -->
-    <ShellContent
-        Title="Iniciar sesión"
-        ContentTemplate="{DataTemplate views:SignInView}"
-        Route="SignIn" />
-
-    <ShellContent
-        Title="Registrar"
-        ContentTemplate="{DataTemplate views:SignUpView}"
-        Route="SignUp" />
-
 
     <!-- TabBar principal, visible solo después de iniciar sesión -->
     <TabBar>
@@ -45,6 +32,25 @@
                 Route="ScorePage" />
         </Tab>
     </TabBar>
-    
-    
+
+
+    <!-- Página de inicio de sesión fuera de las pestañas -->
+    <ShellContent
+        x:Name="SignInShellContent"
+        Title="Login"
+        ContentTemplate="{DataTemplate views:SignInView}"
+        Route="SignIn" 
+        Shell.NavBarIsVisible="False"
+        Shell.FlyoutItemIsVisible="False"
+        />
+
+    <ShellContent
+        Title="Registrar"
+        ContentTemplate="{DataTemplate views:SignUpView}"
+        Route="SignUp"
+        Shell.NavBarIsVisible="False"
+        Shell.FlyoutItemIsVisible="False"
+        />
+
+
 </Shell>
