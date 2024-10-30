@@ -5,6 +5,9 @@
              Title="LoginPage"
              NavigationPage.HasNavigationBar="False"
              >
+
+
+    <!-- azul superior -->
     <Grid
             BackgroundColor="#1C375C"
             HorizontalOptions="FillAndExpand"
@@ -25,12 +28,13 @@
         </StackLayout>
 
         <Frame
-        Grid.Row="1"
-        Margin="0,0,0,-40"
-        BorderColor="#1C375C"
-        CornerRadius="50"
-        HasShadow="True"
-        HeightRequest="700">
+            
+            Grid.Row="1"
+            Margin="0,0,0,-40"
+            BorderColor="#1C375C"
+            CornerRadius="50"
+            HasShadow="True"
+            HeightRequest="700">
 
 
             <!-- blanco -->
@@ -53,19 +57,23 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
+                
                 <Label
                 Grid.Row="0"
                 FontAttributes="Bold"
                 FontSize="24"
                 HorizontalOptions="CenterAndExpand"
                 Text="Bienvenido!"
-                TextColor="#1C375C" />
+                 />
+                
                 <Label
                 Grid.Row="1"
                 Margin="0,-15,0,0"
                 HorizontalOptions="CenterAndExpand"
                 Text="Ingresa con tu cuenta"
-                TextColor="#1C375C" />
+                 />
+                <!--TextColor="#1C375C"-->
+                
                 
                 <Entry
                 Grid.Row="2"
@@ -91,7 +99,7 @@
                 BackgroundColor="#1C375C"
                 Command="{Binding SignInCommand}"
                 CornerRadius="20"
-                Text="Sign In" />
+                Text="Ingresar" />
 
                 <Button
                 Grid.Row="5"
