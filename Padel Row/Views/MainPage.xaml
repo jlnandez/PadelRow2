@@ -27,6 +27,20 @@
             CornerRadius="20"
             Text="Cerrar sesion" />
 
+        <Line X1="40"
+          Y1="0"
+          X2="250"
+          Y2="150"
+          Stroke="Red" />
+
+
+
+        <Button Text="Agregar Employee" x:Name="addEmployee" CornerRadius="100" Clicked="addEmployee_Clicked"/>
+        <Line Y1="0" Y2="10" Stroke="Red" />
+        <Button Text="Show Employee" x:Name="showEmployee" CornerRadius="100" Clicked="showEmployee_Clicked"/>
+
+
+
     </StackLayout>
 
 

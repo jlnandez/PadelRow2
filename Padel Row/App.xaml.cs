@@ -1,4 +1,6 @@
 ﻿using Firebase.Auth;
+using Padel_Row.Services.Implementations;
+using Padel_Row.Services.Interfaces;
 using Padel_Row.Views;
 
 namespace Padel_Row
@@ -16,6 +18,9 @@ namespace Padel_Row
             MainPage = new AppShell();
 
             CheckUserAuthentication();
+
+            //Registro dependencias
+            DependencyService.Register<IEmployeeService,EmployeeService>();
         }
 
         private async void CheckUserAuthentication()

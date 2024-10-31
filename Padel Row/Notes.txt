@@ -3,6 +3,12 @@ https://www.youtube.com/watch?app=desktop&v=3DQMQ9Vuk0c
 **
 dotnet add package FirebaseAuthentication.net
 
+**CRUD Basico
+https://www.youtube.com/watch?v=LYAxYNN8s_s
+
+
+**
+
 
 https://www.youtube.com/watch?app=desktop&v=3DQMQ9Vuk0c
 

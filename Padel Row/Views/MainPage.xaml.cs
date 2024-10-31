@@ -17,5 +17,13 @@ public partial class MainPage : ContentPage
         DisplayAlert("Botón presionado", "¡El botón ha sido presionado!", "OK");
     }
 
+    private void addEmployee_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddUpdateEmployee());
+    }
 
+    private void showEmployee_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new EmployeeList());
+    }
 }
