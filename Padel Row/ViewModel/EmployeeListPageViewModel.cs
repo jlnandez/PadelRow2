@@ -68,13 +68,13 @@ namespace Padel_Row.ViewModel
         {
             if (employee != null)
             {
-                var response = await App.Current.MainPage.DisplayActionSheet("Options!", "Cancel", null, "Update Employee", "Delete Employee");
+                var response = await App.Current.MainPage.DisplayActionSheet("Opciones", "Cerrar", null, "Editar Empleado", "Borrar Empleado");
 
-                if (response == "Update Employee")
+                if (response == "Editar Empleado")
                 {
                     await App.Current.MainPage.Navigation.PushAsync(new AddUpdateEmployee(employee));
                 }
-                else if (response == "Delete Employee")
+                else if (response == "Borrar Empleado")
                 {
                     IsBusy = true;
                     bool deleteResponse = await _employeeService.DeleteEmployee(employee.Key);

@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 using Padel_Row.Views;
 using Padel_Row.ViewModel;
 using Firebase.Auth.Repository;
+using Padel_Row.Services.Interfaces;
+using Padel_Row.Services.Implementations;
+
 
 namespace Padel_Row
 {
@@ -36,14 +39,14 @@ namespace Padel_Row
 
             })); ;
 
-
-            // Registrar UserRepository o cualquier otro servicio que necesites
-            //builder.Services.AddSingleton<UserRepository>();
-
             builder.Services.AddSingleton<SignInView>();
             builder.Services.AddSingleton<SignInViewModel>();
             builder.Services.AddSingleton<SignUpView>();
             builder.Services.AddSingleton<SignUpViewModel>();
+
+
+            //Inyección de Dependencias
+            //builder.Services.AddSingleton<IPlayerService, PlayerService>();
 
             return builder.Build();
         }
