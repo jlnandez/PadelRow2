@@ -2,30 +2,26 @@
 using Firebase.Database.Query;
 using Padel_Row.Model;
 using Padel_Row.Services.Interfaces;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 
 namespace Padel_Row.Services.Implementations
 {
-    public class PlayerService //: IPlayerService
+    public class PlayerService : IPlayerService
     {
-        private readonly FirebaseClient firebase = new FirebaseClient(Settings.FireBaseDatabaseUrl, new FirebaseOptions
+        FirebaseClient firebase = new FirebaseClient(Settings.FireBaseDatabaseUrl, new FirebaseOptions
         {
             AuthTokenAsyncFactory = () => Task.FromResult(Settings.FireBaseSecret)
         });
 
         public async Task<bool> AddOrUpdatePlayer(PlayerModel playerModel)
         {
-            if (!string.IsNullOrWhiteSpace(playerModel.IdPlayer))
+            if (!string.IsNullOrWhiteSpace(playerModel.Key))
             {
                 try
                 {
-                    await firebase.Child(nameof(playerModel)).Child(playerModel.IdPlayer).PutAsync(playerModel);
+                    await firebase.Child(nameof(EmployeeModel)).Child(playerModel.Key).PutAsync(playerModel);
                     return true;
                 }
-                catch
+                catch (Exception ex)
                 {
                     return false;
                 }
@@ -33,31 +29,37 @@ namespace Padel_Row.Services.Implementations
             else
             {
                 var response = await firebase.Child(nameof(PlayerModel)).PostAsync(playerModel);
-                playerModel.IdPlayer = response.Key;
-                return response.Key != null;
+                if (response.Key != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
-        public async Task<bool> DeletePlayer(string idPlayer)
+        public async Task<bool> DeletePlayer(string key)
         {
             try
             {
-                await firebase.Child(nameof(PlayerModel)).Child(idPlayer).DeleteAsync();
+                await firebase.Child(nameof(PlayerModel)).Child(key).DeleteAsync();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
         }
 
-        public async Task<List<PlayerModel>> GetAllJugadores()
+        public async Task<List<PlayerModel>> GetAllPlayers()
         {
-            return (await firebase.Child(nameof(PlayerModel)).OnceAsync<PlayerModel>()).Select(j => new PlayerModel
+            return (await firebase.Child(nameof(PlayerModel)).OnceAsync<PlayerModel>()).Select(f => new PlayerModel
             {
-                IdPlayer = j.Key,
-                Player = j.Object.Player,
-                Team = j.Object.Team
+                Player = f.Object.Player,
+                Team = f.Object.Team,
+                Key = f.Key
             }).ToList();
         }
 

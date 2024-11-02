@@ -6,4 +6,9 @@ public partial class PlayerPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    private void NavigateAddPlayer(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddPlayerView());
+    }
 }

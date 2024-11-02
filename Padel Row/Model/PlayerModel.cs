@@ -2,7 +2,7 @@
 {
     public class PlayerModel
     {
-        public string IdPlayer {  get; set; }
+        public string Key {  get; set; }
 
         public string Player { get; set; }
 

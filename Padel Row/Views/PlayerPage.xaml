@@ -8,5 +8,8 @@
             Text="Player"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button Text="Agregar Jugador" Clicked="NavigateAddPlayer" />
+        
     </VerticalStackLayout>
 </ContentPage>

@@ -2,16 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Padel_Row.Views.AddPlayerView"
-             Title="AddPlayerView">
-    <VerticalStackLayout>
-        <Label 
-            Text="Add Player View"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
-        <Entry Placeholder="Nombre Jugador" Text="" />
-
-
-
-    </VerticalStackLayout>
+             Title="AddPlayerView"
+             xmlns:viewmodels="clr-namespace:Padel_Row.ViewModel"
+             x:DataType="viewmodels:AddUpdatePlayerViewModel"
+             >
+    
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Placeholder="Nombre" Text="{Binding PlayerDetail.Player}" />
+            <Entry Placeholder="Nombre Equipo" Text="{Binding PlayerDetail.Team}" />
+            <Button Text="Guardar Jugador" Command="{Binding SavePlayerCommand}" />
+        </StackLayout>
+    </ContentPage.Content>
+    
+    
 </ContentPage>

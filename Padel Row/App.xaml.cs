@@ -21,6 +21,7 @@ namespace Padel_Row
 
             //Registro dependencias
             DependencyService.Register<IEmployeeService,EmployeeService>();
+            DependencyService.Register<IPlayerService, PlayerService>();
         }
 
         private async void CheckUserAuthentication()

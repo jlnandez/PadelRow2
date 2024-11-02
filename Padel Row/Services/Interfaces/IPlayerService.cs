@@ -7,7 +7,7 @@ namespace Padel_Row.Services.Interfaces
     public interface IPlayerService
     {
         Task<bool> AddOrUpdatePlayer(PlayerModel playerModel);
-        Task<bool> DeletePlayer(string idPlayer);
+        Task<bool> DeletePlayer(string key);
         Task<List<PlayerModel>> GetAllPlayers();
     }
 }

@@ -44,10 +44,6 @@ namespace Padel_Row
             builder.Services.AddSingleton<SignUpView>();
             builder.Services.AddSingleton<SignUpViewModel>();
 
-
-            //Inyección de Dependencias
-            //builder.Services.AddSingleton<IPlayerService, PlayerService>();
-
             return builder.Build();
         }
     }
