@@ -22,33 +22,39 @@ namespace Padel_Row.ViewModel
         public ObservableCollection<PlayerModel> Players { get; set; } = new ObservableCollection<PlayerModel>();
         #endregion
 
+        #region Constructor
+        public PlayerListViewModel()
+        {
+            _playerService = DependencyService.Resolve<IPlayerService>();
+            GetAllPlayers();
+        }
+        #endregion
+
         #region Methods
         private void GetAllPlayers()
         {
             IsBusy = true;
             Task.Run(async () =>
             {
-                var playersList = await _playerService.GetAllPlayers();
+                var playerList = await _playerService.GetAllPlayers();
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     Players.Clear();
-                    if (playersList?.Count > 0)
+                    if (playerList?.Count > 0)
                     {
-                        foreach (var player in playersList)
+                        foreach (var player in playerList)
                         {
                             Players.Add(player);
                         }
                     }
                     IsBusy = IsRefreshing = false;
                 });
-
             });
         }
         #endregion
 
         #region Commands
-
         public ICommand RefreshCommand => new Command(() =>
         {
             IsRefreshing = true;
@@ -59,13 +65,13 @@ namespace Padel_Row.ViewModel
         {
             if (player != null)
             {
-                var response = await App.Current.MainPage.DisplayActionSheet("Opciones", "Cerrar", null, "Editar Empleado", "Borrar Empleado");
+                var response = await App.Current.MainPage.DisplayActionSheet("Opciones", "Cerrar", null, "Editar Jugador", "Borrar Jugador");
 
-                if (response == "Editar Empleado")
+                if (response == "Editar Jugador")
                 {
                     await App.Current.MainPage.Navigation.PushAsync(new AddPlayerView(player));
                 }
-                else if (response == "Borrar Empleado")
+                else if (response == "Borrar Jugador")
                 {
                     IsBusy = true;
                     bool deleteResponse = await _playerService.DeletePlayer(player.Key);

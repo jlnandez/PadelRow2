@@ -11,4 +11,9 @@ public partial class PlayerPage : ContentPage
     {
         Navigation.PushAsync(new AddPlayerView());
     }
+
+    private void NavigateViewPlayer(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new PlayerListPage());
+    }
 }

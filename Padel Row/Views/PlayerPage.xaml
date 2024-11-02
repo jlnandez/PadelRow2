@@ -10,6 +10,8 @@
             HorizontalOptions="Center" />
 
         <Button Text="Agregar Jugador" Clicked="NavigateAddPlayer" />
-        
+
+        <Button Text="Ver Jugadores" Clicked="NavigateViewPlayer" />
+
     </VerticalStackLayout>
 </ContentPage>
