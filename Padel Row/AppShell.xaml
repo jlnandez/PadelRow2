@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:Padel_Row"
     xmlns:views="clr-namespace:Padel_Row.Views"
     Shell.FlyoutBehavior="Flyout"
-    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource PrimaryDark}, Dark={StaticResource OffBlack}}"
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Primary}}"
     Title="Padel_Row">
 
     <!-- TabBar principal, visible solo después de iniciar sesión -->
