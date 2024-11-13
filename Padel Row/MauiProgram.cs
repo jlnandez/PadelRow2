@@ -4,9 +4,6 @@ using Microsoft.Extensions.Logging;
 using Padel_Row.Views;
 using Padel_Row.ViewModel;
 using Firebase.Auth.Repository;
-using Padel_Row.Services.Interfaces;
-using Padel_Row.Services.Implementations;
-
 
 namespace Padel_Row
 {

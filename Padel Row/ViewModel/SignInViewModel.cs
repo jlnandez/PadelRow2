@@ -1,11 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Firebase.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Firebase.Auth.Providers;
+using System.Net;
 
 namespace Padel_Row.ViewModel
 {
@@ -37,8 +34,15 @@ namespace Padel_Row.ViewModel
                 // Guardar el token de autenticación en almacenamiento seguro
                 await SecureStorage.Default.SetAsync("auth_token", _authClient.User.Credential.IdToken);
 
+                // Guardar email
+                await SecureStorage.Default.SetAsync("uuu", Email);
+
+                // Guardar pass
+                await SecureStorage.Default.SetAsync("ppp", Password);
+
                 // Redirigir a MainPage y quitar SignIn de la pila de navegación
                 await Shell.Current.GoToAsync("//MainPage");
+
 
                 // Si la autenticación fue exitosa, dispara el evento
                 //SignInSuccess?.Invoke();

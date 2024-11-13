@@ -18,7 +18,7 @@ namespace Padel_Row.Services.Implementations
             {
                 try
                 {
-                    await firebase.Child(nameof(EmployeeModel)).Child(playerModel.Key).PutAsync(playerModel);
+                    await firebase.Child(nameof(PlayerModel)).Child(playerModel.Key).PutAsync(playerModel);
                     return true;
                 }
                 catch (Exception ex)
