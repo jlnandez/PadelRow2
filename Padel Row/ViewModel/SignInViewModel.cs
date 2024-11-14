@@ -31,8 +31,11 @@ namespace Padel_Row.ViewModel
             {
                 await _authClient.SignInWithEmailAndPasswordAsync(Email, Password);
 
-                // Guardar el token de autenticación en almacenamiento seguro
+                // Guardar el IdToken y el UserId
                 await SecureStorage.Default.SetAsync("auth_token", _authClient.User.Credential.IdToken);
+                await SecureStorage.Default.SetAsync("user_id", _authClient.User.Uid); // Guarda el UserId en SecureStorage
+
+
 
                 // Guardar email
                 await SecureStorage.Default.SetAsync("uuu", Email);

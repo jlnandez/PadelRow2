@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Padel_Row.Views.TorneoAddPage"
+             Title="TorneoAddPage">
+
+    <VerticalStackLayout>
+
+        <Label Text="Nombre del Torneo" FontSize="Medium" TextColor="White"/>
+        <Entry Text="{Binding TournamentDetail.Name}" />
+
+        <Label Text="Fecha del Torneo" FontSize="Medium" TextColor="White"/>
+        <DatePicker Date="{Binding TournamentDetail.Date}" />
+
+        <Button Text="Guardar Torneo" Command="{Binding AddTournamentCommand}" />
+
+    </VerticalStackLayout>
+    
+    
+</ContentPage>

@@ -18,6 +18,13 @@
                 Route="MainPage" />
         </Tab>
 
+        <Tab Icon="menu.png">
+            <ShellContent
+                Title="Torneos"
+                ContentTemplate="{DataTemplate views:TorneoPage}"
+                Route="TorneoPage" />
+        </Tab>
+
         <Tab Icon="player.png">
             <ShellContent
                 Title="Player"

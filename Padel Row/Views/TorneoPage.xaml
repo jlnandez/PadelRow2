@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Padel_Row.Views.TorneoPage"
+             Title="TorneoPage"
+             xmlns:viewmodels="clr-namespace:Padel_Row.ViewModel"
+             xmlns:models="clr-namespace:Padel_Row.Model"
+             x:DataType="viewmodels:TournamentViewModel"
+             >
+
+    <ContentPage.Content>
+        <StackLayout Margin="10,0,10,0">
+            <Button Text="Agregar nuevo Torneo" Clicked="GoToAddTorneo" />
+
+            <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True" />
+
+            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" >
+                <CollectionView ItemsSource="{Binding Tournaments}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:TournamentModel">
+                            <StackLayout Margin="10,5,10,0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Torneo: " />
+                                    <Label Text="{Binding Name}" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Fecha: " />
+                                    <Label Text="{Binding Date}" />
+                                </StackLayout>
+
+
+                                <BoxView HeightRequest="1" Color="Gray" />
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewmodels:TournamentViewModel}},Path=SelectedTorneoCommand}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
+
+        </StackLayout>
+
+    </ContentPage.Content>
+
+
+
+</ContentPage>
