@@ -118,7 +118,10 @@ namespace Padel_Row.ViewModel
         {
             if (tournament != null)
             {
-                var response = await App.Current.MainPage.DisplayActionSheet("Opciones", "Cerrar", null, "Editar Torneo", "Borrar Torneo");
+                var response = await App.Current.MainPage.DisplayActionSheet("Opciones", "Cerrar", null,
+                    "Editar Torneo",
+                    "Borrar Torneo",
+                    "Gestionar Jugadores");
 
                 if (response == "Editar Torneo")
                 {
@@ -132,6 +135,10 @@ namespace Padel_Row.ViewModel
                     {
                         GetAllTorneos();
                     }
+                }
+                else if (response == "Gestionar Jugadores")
+                {
+                    await App.Current.MainPage.Navigation.PushAsync(new TorneoPlayersPage(tournament));
                 }
             }
         });
