@@ -1,5 +1,4 @@
-﻿using Firebase.Auth;
-using Padel_Row.Model;
+﻿using Padel_Row.Model;
 using Padel_Row.Services.Interfaces;
 using Padel_Row.Views;
 using System.Collections.ObjectModel;

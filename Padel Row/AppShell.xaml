@@ -28,14 +28,14 @@
         <Tab Icon="player.png">
             <ShellContent
                 Title="Player"
-                ContentTemplate="{DataTemplate views:PlayerPage}"
+                ContentTemplate="{DataTemplate views:TorneoPage}"
                 Route="PlayerPage" />
         </Tab>
 
         <Tab Icon="marcador.png">
             <ShellContent
                 Title="Score"
-                ContentTemplate="{DataTemplate views:ScorePage}"
+                ContentTemplate="{DataTemplate views:TorneoPage}"
                 Route="ScorePage" />
         </Tab>
     </TabBar>
