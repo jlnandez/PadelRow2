@@ -16,13 +16,15 @@ namespace Padel_Row.Services.Implementations
         {
             if (!string.IsNullOrWhiteSpace(tournament.Id))
             {
+                // Actualiza el torneo existente
                 await firebase.Child(nameof(TournamentModel)).Child(tournament.Id).PutAsync(tournament);
                 return true;
             }
             else
             {
+                // Agrega un nuevo torneo
                 var response = await firebase.Child(nameof(TournamentModel)).PostAsync(tournament);
-                tournament.Id = response.Key;
+                tournament.Id = response.Key; // Asigna el Id solo cuando es nuevo
                 return response.Key != null;
             }
         }
@@ -51,13 +53,6 @@ namespace Padel_Row.Services.Implementations
                 Date = f.Object.Date
             }).ToList();
 
-            //var allTournaments = await firebase.Child(nameof(TournamentModel))
-            //                          .OnceAsync<TournamentModel>();
-
-            //return allTournaments
-            //    //.Where(t => t.Object.UserId == userId)
-            //    .Select(t => t.Object)
-            //    .ToList();
         }
     }
 }

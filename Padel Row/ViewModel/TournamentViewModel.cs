@@ -54,28 +54,23 @@ namespace Padel_Row.ViewModel
 
         //--------------------------Metodos
 
-        private void GetAllTorneos()
+        public async void GetAllTorneos()
         {
             IsBusy = true;
-            Task.Run(async () =>
+            var userId = await SecureStorage.Default.GetAsync("user_id");
+            var torneosList = await _tournamentService.GetAllTournaments(userId);
+
+            Device.BeginInvokeOnMainThread(() =>
             {
-                // Obtenemos el UserId del usuario actual
-                var userId = await SecureStorage.Default.GetAsync("user_id");
-
-                var torneosList = await _tournamentService.GetAllTournaments(userId);
-
-                Device.BeginInvokeOnMainThread(() =>
+                Tournaments.Clear();
+                if (torneosList?.Count > 0)
                 {
-                    Tournaments.Clear();
-                    if (torneosList?.Count > 0)
+                    foreach (var torneo in torneosList)
                     {
-                        foreach (var torneo in torneosList)
-                        {
-                            Tournaments.Add(torneo);
-                        }
+                        Tournaments.Add(torneo);
                     }
-                    IsBusy = IsRefreshing = false;
-                });
+                }
+                IsBusy = IsRefreshing = false;
             });
         }
 
@@ -89,21 +84,27 @@ namespace Padel_Row.ViewModel
             var userId = await SecureStorage.Default.GetAsync("user_id");
             TournamentDetail.UserId = userId;
 
+            // Variable temporal para verificar si es un nuevo torneo o uno existente
+            bool isNewTournament = string.IsNullOrWhiteSpace(TournamentDetail.Id);
 
+            // Llamada para agregar o actualizar el torneo
             bool res = await _tournamentService.AddOrUpdateTournament(TournamentDetail);
             if (res)
             {
-
-                if (!string.IsNullOrWhiteSpace(TournamentDetail.Id))
+                // Muestra el mensaje correcto según si es nuevo o actualizado
+                if (isNewTournament)
                 {
-                    await App.Current.MainPage.DisplayAlert("Success!", "Torneo Actualizado.", "Ok");
-
+                    await App.Current.MainPage.DisplayAlert("Success!", "Se creó el torneo.", "Ok");
+                    // Limpiar TournamentDetail después de crear un nuevo torneo
+                    TournamentDetail = new TournamentModel() { Date = DateTime.Now };
                 }
                 else
                 {
-                    TournamentDetail = new TournamentModel() { };
-                    await App.Current.MainPage.DisplayAlert("Success!", "Se creo Torneo", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Success!", "Torneo actualizado.", "Ok");
                 }
+
+                // Regresa a la pantalla anterior
+                await App.Current.MainPage.Navigation.PopAsync();
             }
             IsBusy = false;
         });
