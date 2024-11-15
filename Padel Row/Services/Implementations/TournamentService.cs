@@ -16,15 +16,29 @@ namespace Padel_Row.Services.Implementations
         {
             if (!string.IsNullOrWhiteSpace(tournament.Id))
             {
-                // Actualiza el torneo existente
-                await firebase.Child(nameof(TournamentModel)).Child(tournament.Id).PutAsync(tournament);
+                // Actualizar torneo existente (sin incluir el Id en los datos)
+                await firebase.Child(nameof(TournamentModel)).Child(tournament.Id).PutAsync(new TournamentModel
+                {
+                    Name = tournament.Name,
+                    Date = tournament.Date,
+                    UserId = tournament.UserId,
+                    Players = tournament.Players
+                });
                 return true;
             }
             else
             {
-                // Agrega un nuevo torneo
-                var response = await firebase.Child(nameof(TournamentModel)).PostAsync(tournament);
-                tournament.Id = response.Key; // Asigna el Id solo cuando es nuevo
+                // Crear nuevo torneo
+                var response = await firebase.Child(nameof(TournamentModel)).PostAsync(new TournamentModel
+                {
+                    Name = tournament.Name,
+                    Date = tournament.Date,
+                    UserId = tournament.UserId,
+                    Players = tournament.Players
+                });
+
+                // Asignar el Id generado por Firebase al objeto en memoria
+                tournament.Id = response.Key;
                 return response.Key != null;
             }
         }
