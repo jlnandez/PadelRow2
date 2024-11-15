@@ -10,6 +10,8 @@ public partial class TorneoAddPage : ContentPage
     {
         InitializeComponent();
         this.BindingContext = new TournamentViewModel();
+
+
     }
 
     public TorneoAddPage(TournamentModel tournament)

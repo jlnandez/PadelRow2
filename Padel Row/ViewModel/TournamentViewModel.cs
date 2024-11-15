@@ -1,4 +1,5 @@
-﻿using Padel_Row.Model;
+﻿using Firebase.Auth;
+using Padel_Row.Model;
 using Padel_Row.Services.Interfaces;
 using Padel_Row.Views;
 using System.Collections.ObjectModel;
@@ -35,6 +36,7 @@ namespace Padel_Row.ViewModel
         public TournamentViewModel()
         {
             _tournamentService = DependencyService.Resolve<ITournamentService>();
+            TournamentDetail.Date = DateTime.Now; // Inicializa con la fecha actual
             GetAllTorneos();
         }
 
@@ -44,7 +46,7 @@ namespace Padel_Row.ViewModel
             TournamentDetail = new TournamentModel
             {
                 Name = tournamentResponse.Name,
-                Date = tournamentResponse.Date,
+                Date = tournamentResponse.Date == default ? DateTime.Now : tournamentResponse.Date, // Usa la fecha actual si no se proporciona una
                 Id = tournamentResponse.Id
             };
         }
@@ -57,7 +59,10 @@ namespace Padel_Row.ViewModel
             IsBusy = true;
             Task.Run(async () =>
             {
-                var torneosList = await _tournamentService.GetAllTournaments();
+                // Obtenemos el UserId del usuario actual
+                var userId = await SecureStorage.Default.GetAsync("user_id");
+
+                var torneosList = await _tournamentService.GetAllTournaments(userId);
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -79,6 +84,12 @@ namespace Padel_Row.ViewModel
         {
             if (IsBusy) return;
             IsBusy = true;
+
+            // Obtenemos el UserId del usuario actual
+            var userId = await SecureStorage.Default.GetAsync("user_id");
+            TournamentDetail.UserId = userId;
+
+
             bool res = await _tournamentService.AddOrUpdateTournament(TournamentDetail);
             if (res)
             {
@@ -91,7 +102,7 @@ namespace Padel_Row.ViewModel
                 else
                 {
                     TournamentDetail = new TournamentModel() { };
-                    await App.Current.MainPage.DisplayAlert("Success!", "Se creo Torneo.", "Ok");
+                    await App.Current.MainPage.DisplayAlert("Success!", "Se creo Torneo", "Ok");
                 }
             }
             IsBusy = false;
@@ -112,9 +123,6 @@ namespace Padel_Row.ViewModel
                 if (response == "Editar Torneo")
                 {
                     await App.Current.MainPage.Navigation.PushAsync(new TorneoAddPage(tournament));
-                    //TournamentDetail = tournament; // Setea el torneo a editar
-                    
-                    await App.Current.MainPage.Navigation.PushAsync(new TorneoAddPage());
                 }
                 else if (response == "Borrar Torneo")
                 {

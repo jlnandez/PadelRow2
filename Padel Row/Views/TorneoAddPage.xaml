@@ -10,6 +10,7 @@
         <Entry Text="{Binding TournamentDetail.Name}" />
 
         <Label Text="Fecha del Torneo" FontSize="Medium" TextColor="White"/>
+        
         <DatePicker Date="{Binding TournamentDetail.Date}" />
 
         <Button Text="Guardar Torneo" Command="{Binding AddTournamentCommand}" />

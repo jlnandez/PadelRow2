@@ -40,20 +40,24 @@ namespace Padel_Row.Services.Implementations
             }
         }
 
-        public async Task<List<TournamentModel>> GetAllTournaments()
+        public async Task<List<TournamentModel>> GetAllTournaments(string userId)
         {
-            return (await firebase.Child(nameof(TournamentModel)).OnceAsync<TournamentModel>()).Select(f => new TournamentModel
+            return (await firebase.Child(nameof(TournamentModel)).OnceAsync<TournamentModel>())
+                .Where(f => f.Object.UserId == userId)
+                .Select(f => new TournamentModel
             {
                 Id = f.Key,
                 Name = f.Object.Name,
                 Date = f.Object.Date
             }).ToList();
-        }
 
-        public async Task<TournamentModel> GetTournamentById(string id)
-        {
-            var tournament = await firebase.Child(nameof(TournamentModel)).Child(id).OnceSingleAsync<TournamentModel>();
-            return tournament;
+            //var allTournaments = await firebase.Child(nameof(TournamentModel))
+            //                          .OnceAsync<TournamentModel>();
+
+            //return allTournaments
+            //    //.Where(t => t.Object.UserId == userId)
+            //    .Select(t => t.Object)
+            //    .ToList();
         }
     }
 }

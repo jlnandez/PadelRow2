@@ -9,11 +9,5 @@
 
         public string UserId { get; set; }
 
-        // Constructor opcional
-        //public TournamentModel()
-        //{
-        //    Id = Guid.NewGuid().ToString();
-        //}
-
     }
 }

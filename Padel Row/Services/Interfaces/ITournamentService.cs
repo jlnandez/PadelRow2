@@ -6,7 +6,7 @@ namespace Padel_Row.Services.Interfaces
     {
         Task<bool> AddOrUpdateTournament(TournamentModel tournament);
         Task<bool> DeleteTournament(string id);
-        Task<List<TournamentModel>> GetAllTournaments();
-        Task<TournamentModel> GetTournamentById(string id);
+        Task<List<TournamentModel>> GetAllTournaments(string userId);
+
     }
 }
