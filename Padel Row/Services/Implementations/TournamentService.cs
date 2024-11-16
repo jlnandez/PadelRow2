@@ -2,6 +2,7 @@
 using Firebase.Database.Query;
 using Padel_Row.Model;
 using Padel_Row.Services.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace Padel_Row.Services.Implementations
 {
@@ -61,12 +62,30 @@ namespace Padel_Row.Services.Implementations
             return (await firebase.Child(nameof(TournamentModel)).OnceAsync<TournamentModel>())
                 .Where(f => f.Object.UserId == userId)
                 .Select(f => new TournamentModel
-            {
-                Id = f.Key,
-                Name = f.Object.Name,
-                Date = f.Object.Date
-            }).ToList();
+                {
+                    Id = f.Key,
+                    Name = f.Object.Name,
+                    Date = f.Object.Date,
+                    UserId = f.Object.UserId,
+                    Players = f.Object.Players
+                }).ToList();
 
         }
+
+        public async Task<TournamentModel> GetTournamentById(string tournamentId)
+        {
+            var result = await firebase
+                .Child(nameof(TournamentModel))
+                .Child(tournamentId)
+                .OnceSingleAsync<TournamentModel>();
+
+            // Agregar el ID al modelo devuelto, ya que no está incluido en los datos almacenados
+            if (result != null)
+            {
+                result.Id = tournamentId;
+            }
+            return result;
+        }
+
     }
 }

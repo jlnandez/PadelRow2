@@ -4,21 +4,33 @@
              x:Class="Padel_Row.Views.TorneoPlayersPage"
              Title="TorneoPlayersPage"
              xmlns:viewmodels="clr-namespace:Padel_Row.ViewModel"
+             xmlns:models="clr-namespace:Padel_Row.Model"
+             x:DataType="viewmodels:TournamentPlayersViewModel"
              >
     
     <VerticalStackLayout Padding="10">
         <Label Text="Jugadores en el Torneo" FontSize="Medium" />
 
-        <CollectionView ItemsSource="{Binding Players}">
+        <CollectionView ItemsSource="{Binding Players}" Margin="0,10,0,0">
             <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Name}" FontSize="Small" />
+                <DataTemplate x:DataType="models:PlayerModel">
+                    <Frame BorderColor="Gray" CornerRadius="10" Padding="5">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="{Binding Name}" VerticalOptions="Center" />
+                        <Button Text="Eliminar" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TournamentPlayersViewModel}}, Path=RemovePlayerCommand}" CommandParameter="{Binding .}" />
+                    </StackLayout>
+                    </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
         <Entry Placeholder="Nombre del jugador" Text="{Binding NewPlayerName}" />
+        
         <Button Text="Agregar Jugador" Command="{Binding AddPlayerCommand}" />
+        <Button Text="Guardar Cambios" Command="{Binding SavePlayersCommand}" />
+        
+        
+        
     </VerticalStackLayout>
     
 </ContentPage>

@@ -8,5 +8,7 @@ namespace Padel_Row.Services.Interfaces
         Task<bool> DeleteTournament(string id);
         Task<List<TournamentModel>> GetAllTournaments(string userId);
 
+        Task<TournamentModel> GetTournamentById(string tournamentId);
+
     }
 }

@@ -8,7 +8,8 @@ namespace Padel_Row.Model
 {
     public class PlayerModel
     {
-        public string Id { get; set; } // Identificador único del jugador
-        public string Name { get; set; } // Nombre del jugador
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public int Score { get; set; } = 0; // Puntaje inicializado en 0
     }
 }

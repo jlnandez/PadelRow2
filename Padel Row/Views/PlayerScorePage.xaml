@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Padel_Row.Views.PlayerScorePage"
+             Title="PlayerScorePage"
+             xmlns:viewmodels="clr-namespace:Padel_Row.ViewModel"
+             xmlns:models="clr-namespace:Padel_Row.Model"
+             x:DataType="viewmodels:PlayerScoreViewModel"
+             >
+
+
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label Text="Puntajes de Jugadores" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center" />
+            <CollectionView ItemsSource="{Binding Players}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:PlayerModel">
+                        <StackLayout Orientation="Horizontal" Padding="10">
+                            <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="Center" />
+                            <Label Text="{Binding Score}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+
+                            <Button Text="+" Command="{Binding BindingContext.IncreaseScoreCommand, Source={x:Reference PlayerScorePage}}" 
+                                    CommandParameter="{Binding}"
+                                    AutomationId="IncreaseButton">
+                                    
+                                <Button.ImageSource>
+                                    <FontImageSource Glyph="🔼" Size="20" Color="Green" />
+                                </Button.ImageSource>
+                            </Button>
+
+                            <Button Text="-" Command="{Binding BindingContext.DecreaseScoreCommand, Source={x:Reference PlayerScorePage}}" 
+                                    CommandParameter="{Binding}"
+                                    AutomationId="DecreaseButton">
+                                    
+                                <Button.ImageSource>
+                                    <FontImageSource Glyph="🔽" Size="20" Color="Red" />
+                                </Button.ImageSource>
+                            </Button>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

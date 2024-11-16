@@ -15,6 +15,7 @@
             <ActivityIndicator IsVisible="{Binding IsBusy}" IsRunning="True" />
 
             <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" >
+                
                 <CollectionView ItemsSource="{Binding Tournaments}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:TournamentModel">
@@ -38,7 +39,11 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                
             </RefreshView>
+
+
+            <Button Text="Ver Puntajes" Command="{Binding NavigateToScoresCommand}" />
 
 
         </StackLayout>

@@ -93,13 +93,13 @@ namespace Padel_Row.ViewModel
                 // Muestra el mensaje correcto según si es nuevo o actualizado
                 if (isNewTournament)
                 {
-                    await App.Current.MainPage.DisplayAlert("Success!", "Se creó el torneo.", "Ok");
+                    //await App.Current.MainPage.DisplayAlert("Success!", "Se creó el torneo.", "Ok");
                     // Limpiar TournamentDetail después de crear un nuevo torneo
                     TournamentDetail = new TournamentModel() { Date = DateTime.Now };
                 }
                 else
                 {
-                    await App.Current.MainPage.DisplayAlert("Success!", "Torneo actualizado.", "Ok");
+                    //await App.Current.MainPage.DisplayAlert("Success!", "Torneo actualizado.", "Ok");
                 }
 
                 // Regresa a la pantalla anterior
@@ -119,9 +119,11 @@ namespace Padel_Row.ViewModel
             if (tournament != null)
             {
                 var response = await App.Current.MainPage.DisplayActionSheet("Opciones", "Cerrar", null,
+                    "Ir a Scores",
+                    "Gestionar Jugadores",
                     "Editar Torneo",
-                    "Borrar Torneo",
-                    "Gestionar Jugadores");
+                    "Borrar Torneo"
+                    );
 
                 if (response == "Editar Torneo")
                 {
@@ -140,7 +142,17 @@ namespace Padel_Row.ViewModel
                 {
                     await App.Current.MainPage.Navigation.PushAsync(new TorneoPlayersPage(tournament));
                 }
+                else if (response == "Ir a Scores")
+                {
+                    await App.Current.MainPage.Navigation.PushAsync(new PlayerScorePage(tournament));
+                }
             }
+        });
+
+
+        public ICommand NavigateToScoresCommand => new Command(async () =>
+        {
+            //await App.Current.MainPage.Navigation.PushAsync(new PlayerScorePage());
         });
     }
 }
