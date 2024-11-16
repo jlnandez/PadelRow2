@@ -19,18 +19,24 @@
                             <Label Text="{Binding Name}" FontSize="Medium" VerticalOptions="Center" />
                             <Label Text="{Binding Score}" FontSize="Medium" VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
 
-                            <Button Text="+" Command="{Binding BindingContext.IncreaseScoreCommand, Source={x:Reference PlayerScorePage}}" 
-                                    CommandParameter="{Binding}"
-                                    AutomationId="IncreaseButton">
+                            <Button Text="+" 
+                                    Command="{Binding Source={RelativeSource 
+                                     AncestorType={x:Type viewmodels:PlayerScoreViewModel}}, 
+                                     Path=IncreaseScoreCommand}" 
+                                    CommandParameter="{Binding .}"
+                                    >
                                     
                                 <Button.ImageSource>
                                     <FontImageSource Glyph="🔼" Size="20" Color="Green" />
                                 </Button.ImageSource>
-                            </Button>
+                            </Button> 
 
-                            <Button Text="-" Command="{Binding BindingContext.DecreaseScoreCommand, Source={x:Reference PlayerScorePage}}" 
-                                    CommandParameter="{Binding}"
-                                    AutomationId="DecreaseButton">
+                            <Button Text="-" 
+                                    Command="{Binding Source={RelativeSource 
+                                     AncestorType={x:Type viewmodels:PlayerScoreViewModel}}, 
+                                     Path=DecreaseScoreCommand}" 
+                                    CommandParameter="{Binding .}"
+                                    >
                                     
                                 <Button.ImageSource>
                                     <FontImageSource Glyph="🔽" Size="20" Color="Red" />

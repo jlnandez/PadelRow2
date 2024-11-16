@@ -11,8 +11,6 @@ namespace Padel_Row.ViewModel
 
         public ObservableCollection<PlayerModel> Players { get; set; } = new ObservableCollection<PlayerModel>();
 
-
-        //public TournamentModel Tournament { get; }
         public TournamentModel Tournament { get; private set; }
 
 
@@ -21,17 +19,6 @@ namespace Padel_Row.ViewModel
             _tournamentService = DependencyService.Resolve<ITournamentService>();
             Tournament = tournament;
             Players = new ObservableCollection<PlayerModel>(tournament.Players);
-            //LoadPlayers();
-        }
-
-
-        private void LoadPlayers()
-        {
-            Players.Clear();
-            foreach (var player in Tournament.Players)
-            {
-                Players.Add(player);
-            }
         }
 
         public ICommand IncreaseScoreCommand => new Command<PlayerModel>(async (player) =>

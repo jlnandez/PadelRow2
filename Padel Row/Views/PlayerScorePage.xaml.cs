@@ -8,6 +8,6 @@ public partial class PlayerScorePage : ContentPage
     public PlayerScorePage(TournamentModel tournament)
     {
         InitializeComponent();
-        BindingContext = new PlayerScoreViewModel(tournament);
+        this.BindingContext = new PlayerScoreViewModel(tournament);
     }
 }

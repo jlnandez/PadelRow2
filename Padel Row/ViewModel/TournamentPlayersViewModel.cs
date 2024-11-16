@@ -78,7 +78,7 @@ namespace Padel_Row.ViewModel
             try
             {
                 await _tournamentService.AddOrUpdateTournament(Tournament);
-                await App.Current.MainPage.DisplayAlert("Éxito", "Jugadores actualizados.", "OK");
+                //await App.Current.MainPage.DisplayAlert("Éxito", "Jugadores actualizados.", "OK");
                 await App.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
