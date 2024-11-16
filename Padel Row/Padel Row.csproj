@@ -63,6 +63,7 @@
 	  <None Remove="Resources\Images\menu.png" />
 	  <None Remove="Resources\Images\padelrow.png" />
 	  <None Remove="Resources\Images\player.png" />
+	  <None Remove="Resources\Images\torneo.png" />
 	</ItemGroup>
 
 	<ItemGroup>
